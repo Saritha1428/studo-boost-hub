@@ -1,73 +1,181 @@
-# Welcome to your Lovable project
+# AI Dropout Prevention System - Student Dashboard
 
-## Project info
+A comprehensive student management system with AI-powered dropout risk prediction, gamification, and academic tracking.
 
-**URL**: https://lovable.dev/projects/618fb208-65e1-4b9f-92ef-04775775d3e2
+## 🎯 Project Overview
 
-## How can I edit this code?
+This system helps educational institutions prevent student dropouts through:
+- **AI-powered risk prediction** with detailed explanations
+- **Gamification elements** to boost student engagement  
+- **Comprehensive academic tracking** and performance analytics
+- **Smart attendance monitoring** with proactive alerts
+- **Counseling request system** for student support
 
-There are several ways of editing your application.
+## ✨ Features
 
-**Use Lovable**
+### 📊 Student Dashboard
+- Real-time dropout risk assessment display
+- Quick stats overview (CGPA, attendance, XP points)
+- Recent achievements and notifications
+- Performance alerts and recommendations
+- Quick action buttons for counseling requests
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/618fb208-65e1-4b9f-92ef-04775775d3e2) and start prompting.
+### 📈 Attendance Tracking
+- Subject-wise attendance monitoring with visual charts
+- Weekly/monthly attendance trends
+- Automatic shortage alerts for attendance < 75%
+- Personalized recommendations for improvement
+- Calendar view of attendance history
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🎓 Academic Progress
+- CGPA/SGPA progression tracking with trends
+- Subject-wise performance analysis and breakdowns
+- AI-powered grade predictions with confidence levels
+- Semester-wise detailed marksheets
+- Performance comparison with class averages
+- Strengths and weaknesses identification
 
-**Use your preferred IDE**
+### 🎮 Gamification System
+- XP-based progression with levels and rewards
+- Achievement badges (Attendance Star, Assignment Hero, etc.)
+- Daily/weekly streak tracking for motivation
+- Class leaderboards and peer comparisons
+- Progress bars for course completion
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🤖 Risk Prediction AI
+- ML-powered dropout probability assessment
+- Detailed explanations of risk factors
+- Visual trend analysis and historical data
+- Actionable recommendations for improvement
+- Early warning system for at-risk students
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 💬 Counseling System
+- Easy counseling request submission
+- Status tracking (Pending/In Progress/Completed)
+- Priority-based request handling
+- Communication history with counselors
 
-Follow these steps:
+### 👤 Student Profile Management
+- Personal and academic information management
+- Editable profile with contact details
+- Attendance and grade history views
+- Performance trend visualizations
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🛠 Technical Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **Frontend**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with custom teal/cyan theme
+- **UI Components**: Shadcn/ui (Radix UI primitives)
+- **Charts & Analytics**: Recharts for data visualization
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Build Tool**: Vite for fast development
+- **State Management**: React Query for server state
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🎨 Design System
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+- **Theme**: Modern teal/cyan color palette
+- **Typography**: Clean, accessible font hierarchy
+- **Components**: Consistent spacing, shadows, and animations
+- **Responsive**: Mobile-first responsive design
+- **Dark Mode**: Full dark/light mode support
+- **Accessibility**: WCAG compliant components
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/Saritha1428/Ai_Dropout_SIh.git
+cd Ai_Dropout_SIh
+```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Start the development server**
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. **Open your browser**
+Navigate to [http://localhost:5173](http://localhost:5173)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
+```bash
+npm run build
+```
 
-**Use GitHub Codespaces**
+## 📁 Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+├── components/
+│   ├── ui/              # Shadcn UI components
+│   ├── Navigation.tsx   # Main navigation with notifications
+│   ├── StatCard.tsx     # Reusable stat display component
+│   └── RiskBadge.tsx    # Risk level indicator component
+├── pages/
+│   ├── StudentDashboard.tsx    # Main dashboard overview
+│   ├── StudentProfile.tsx      # Profile management
+│   ├── Attendance.tsx          # Attendance tracking
+│   ├── Academic.tsx            # Academic progress
+│   ├── Gamification.tsx        # XP and achievements  
+│   ├── RiskPrediction.tsx      # AI risk analysis
+│   └── CounselingRequest.tsx   # Counseling system
+├── hooks/               # Custom React hooks
+├── lib/                 # Utility functions
+└── assets/             # Images and static files
+```
 
-## What technologies are used for this project?
+## 🎯 Page Features
 
-This project is built with:
+### 🏠 Student Dashboard
+- Risk level display with visual indicators
+- Quick stats (CGPA: 7.8, Attendance: 78%, XP: 2,450)
+- Recent achievements and badge showcase
+- Performance trend charts and analytics
+- Notification system with performance alerts
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 📊 Attendance Page  
+- Subject-wise attendance tracking
+- Visual charts (line graphs, bar charts)
+- Attendance shortage alerts for < 75%
+- Weekly/monthly trend analysis
+- Actionable recommendations
 
-## How can I deploy this project?
+### 🎓 Academic Page
+- CGPA/SGPA progression tracking
+- Subject-wise grade breakdowns  
+- Performance radar charts
+- AI-powered grade predictions
+- Semester-wise detailed reports
+- Export functionality for marksheets
 
-Simply open [Lovable](https://lovable.dev/projects/618fb208-65e1-4b9f-92ef-04775775d3e2) and click on Share -> Publish.
+### 🎮 Gamification Page
+- XP tracking with level progression
+- Achievement badges and unlocks
+- Daily/weekly streak counters
+- Leaderboard comparisons
+- Motivational progress indicators
 
-## Can I connect a custom domain to my Lovable project?
+### 🤖 Risk Prediction Page
+- AI dropout probability assessment
+- Detailed risk factor explanations
+- Historical trend analysis
+- Personalized recommendations
+- Visual risk indicators and charts
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### 💬 Counseling Request Page
+- Easy request form submission
+- Request status tracking
+- Priority categorization
+- Communication history
+- Mentor assignment system
