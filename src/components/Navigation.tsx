@@ -29,11 +29,10 @@ const Navigation = () => {
   const navigation = [
     { name: "Dashboard", href: "/", icon: Home },
     { name: "Profile", href: "/profile", icon: User },
-    { name: "Gamification", href: "/gamification", icon: Trophy },
     { name: "Risk Analysis", href: "/risk-prediction", icon: AlertTriangle },
-    { name: "Counseling", href: "/counseling", icon: MessageCircle },
     { name: "Attendance", href: "/attendance", icon: Calendar },
     { name: "Academic", href: "/academic", icon: GraduationCap },
+    { name: "Counseling", href: "/counseling", icon: MessageCircle },
   ];
 
   // Mock notifications data - in real app, this would come from API/state
@@ -88,7 +87,7 @@ const Navigation = () => {
   const unreadCount = notifications.filter(n => n.type === "warning" || n.type === "info").length;
 
   return (
-    <nav className="bg-card border-b shadow-card">
+    <nav className="bg-card border-b shadow-card sticky top-0 z-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -110,7 +109,7 @@ const Navigation = () => {
                         "flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors",
                         isActive
                           ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                          : "text-muted-foreground hover:bg-warning hover:text-warning-foreground"
                       )}
                     >
                       <Icon className="h-4 w-4" />
@@ -171,8 +170,8 @@ const Navigation = () => {
                 })}
               </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-center">
-                <span className="text-sm text-muted-foreground">View all notifications</span>
+              <DropdownMenuItem className="text-center" asChild>
+                <Link to="/notifications" className="text-sm text-muted-foreground">View all notifications</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
