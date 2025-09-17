@@ -113,7 +113,7 @@ const Academic = () => {
         </div>
 
         {/* Academic Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <StatCard
             title="Current CGPA"
             value={academicStats.currentCGPA}
@@ -127,11 +127,6 @@ const Academic = () => {
             icon={<TrendingUp className="h-4 w-4" />}
             trend={{ value: "+0.10 from last", positive: true }}
             variant="success"
-          />
-          <StatCard
-            title="Credits Completed"
-            value={`${academicStats.creditsCompleted}/${academicStats.totalCredits}`}
-            icon={<Target className="h-4 w-4" />}
           />
           <StatCard
             title="Class Rank"
@@ -222,7 +217,30 @@ const Academic = () => {
         <Card className="shadow-card mb-8">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Current Semester Breakdown</CardTitle>
-            <Button variant="outline" size="sm">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => {
+                // Create a simple marksheet export
+                const marksheetData = {
+                  student: "Alex Johnson",
+                  rollNo: "CS21B1001",
+                  semester: "6th Semester",
+                  subjects: subjectMarks,
+                  cgpa: academicStats.currentCGPA,
+                  sgpa: academicStats.currentSGPA
+                };
+                
+                const dataStr = JSON.stringify(marksheetData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'marksheet_sem6.json';
+                link.click();
+                URL.revokeObjectURL(url);
+              }}
+            >
               <Download className="h-4 w-4 mr-2" />
               Export Marksheet
             </Button>
@@ -238,6 +256,7 @@ const Academic = () => {
                     <th className="text-center p-3 font-semibold">Internal</th>
                     <th className="text-center p-3 font-semibold">External</th>
                     <th className="text-center p-3 font-semibold">Total</th>
+                    <th className="text-center p-3 font-semibold">Sem</th>
                     <th className="text-center p-3 font-semibold">Grade</th>
                   </tr>
                 </thead>
@@ -250,6 +269,7 @@ const Academic = () => {
                       <td className="p-3 text-center">{subject.internal}</td>
                       <td className="p-3 text-center">{subject.external}</td>
                       <td className="p-3 text-center font-semibold">{subject.total}</td>
+                      <td className="p-3 text-center">6th</td>
                       <td className="p-3 text-center">
                         <Badge variant={getGradeColor(subject.grade) as any}>
                           {subject.grade}

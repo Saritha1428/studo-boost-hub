@@ -87,14 +87,7 @@ const StudentDashboard = () => {
         )}
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <StatCard
-            title="Current XP"
-            value={studentData.currentXP.toLocaleString()}
-            icon={<Trophy className="h-4 w-4" />}
-            trend={{ value: "+150 this week", positive: true }}
-            variant="success"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <StatCard
             title="Overall Attendance"
             value={`${studentData.overallAttendance}%`}
@@ -109,13 +102,6 @@ const StudentDashboard = () => {
             trend={{ value: "+0.2 this sem", positive: true }}
             variant="success"
           />
-          <StatCard
-            title="Badges Earned"
-            value={studentData.badges}
-            icon={<Award className="h-4 w-4" />}
-            trend={{ value: "+2 this month", positive: true }}
-            variant="default"
-          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -127,22 +113,42 @@ const StudentDashboard = () => {
                 Dropout Risk Analysis
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <RiskBadge level={studentData.riskLevel} />
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Risk Score</span>
-                    <span className="text-sm text-muted-foreground">{studentData.riskPercentage}%</span>
+            <CardContent className="flex flex-col items-center">
+              <div className="relative w-32 h-32 mb-4">
+                <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="hsl(var(--muted))"
+                    strokeWidth="8"
+                    fill="none"
+                    className="opacity-20"
+                  />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="hsl(var(--warning))"
+                    strokeWidth="8"
+                    fill="none"
+                    strokeDasharray={`${65 * 2.83} 283`}
+                    className="transition-all duration-1000"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-warning">65%</div>
+                    <div className="text-xs text-muted-foreground">Risk</div>
                   </div>
-                  <Progress value={studentData.riskPercentage} className="h-2" />
                 </div>
-                <Link to="/risk-prediction">
-                  <Button variant="outline" className="w-full">
-                    View Detailed Analysis
-                  </Button>
-                </Link>
               </div>
+              <RiskBadge level={studentData.riskLevel} className="mb-4" />
+              <Link to="/risk-prediction">
+                <Button variant="outline" className="w-full">
+                  View Detailed Analysis
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 
@@ -179,33 +185,27 @@ const StudentDashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Recent Achievements */}
+          {/* Academic Progress */}
           <Card className="shadow-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Award className="h-5 w-5" />
-                Recent Badges
+                <TrendingUp className="h-5 w-5 text-accent" />
+                Academic Progress
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {recentBadges.map((badge, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      badge.earned ? 'bg-accent text-accent-foreground' : 'bg-muted text-muted-foreground'
-                    }`}>
-                      {badge.earned ? '🏆' : '🔒'}
-                    </div>
-                    <div className="flex-1">
-                      <div className={`font-medium text-sm ${!badge.earned && 'text-muted-foreground'}`}>
-                        {badge.name}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {badge.description}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium">Current Semester</span>
+                  <span className="text-sm text-muted-foreground">6th Semester</span>
+                </div>
+                <div className="w-full bg-muted rounded-full h-2">
+                  <div className="bg-gradient-primary h-2 rounded-full" style={{ width: '75%' }}></div>
+                </div>
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Progress: 75%</span>
+                  <span>Expected Graduation: 2025</span>
+                </div>
               </div>
             </CardContent>
           </Card>

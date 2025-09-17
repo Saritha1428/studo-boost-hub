@@ -104,36 +104,60 @@ const RiskPrediction = () => {
               AI Risk Assessment
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
+          <CardContent className="flex flex-col items-center">
+            <div className="relative w-40 h-40 mb-6">
+              <svg className="w-40 h-40 transform -rotate-90" viewBox="0 0 100 100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="hsl(var(--muted))"
+                  strokeWidth="6"
+                  fill="none"
+                  className="opacity-20"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="hsl(var(--warning))"
+                  strokeWidth="6"
+                  fill="none"
+                  strokeDasharray={`${65 * 2.83} 283`}
+                  className="transition-all duration-1000"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <RiskBadge level={riskData.level} className="mb-4" />
-                  <div className="text-3xl font-bold text-primary mb-2">{riskData.percentage}%</div>
-                  <div className="text-muted-foreground">Dropout Risk Probability</div>
+                  <div className="text-3xl font-bold text-warning">65%</div>
+                  <div className="text-sm text-muted-foreground">Risk</div>
                 </div>
-                <Progress value={riskData.percentage} className="h-4" />
               </div>
-              <div className="space-y-3">
-                <h4 className="font-semibold">Key Risk Factors:</h4>
-                {riskData.factors.map((factor, index) => (
-                  <div key={index} className="flex items-center justify-between p-2 rounded-lg border">
-                    <div>
-                      <div className="font-medium text-sm">{factor.factor}</div>
-                      <div className="text-xs text-muted-foreground">{factor.value}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-semibold">{factor.impact}%</div>
-                      <div className={`text-xs ${
-                        factor.trend === 'declining' ? 'text-destructive' : 
-                        factor.trend === 'stable' ? 'text-success' : 'text-warning'
-                      }`}>
-                        {factor.trend}
-                      </div>
+            </div>
+            <RiskBadge level={riskData.level} className="mb-4" />
+            <h3 className="text-xl font-bold mb-2">Medium Dropout Risk</h3>
+            <p className="text-muted-foreground text-center mb-6">
+              Based on multiple performance indicators
+            </p>
+            <div className="w-full space-y-3">
+              <h4 className="font-semibold">Key Risk Factors:</h4>
+              {riskData.factors.map((factor, index) => (
+                <div key={index} className="flex items-center justify-between p-2 rounded-lg border">
+                  <div>
+                    <div className="font-medium text-sm">{factor.factor}</div>
+                    <div className="text-xs text-muted-foreground">{factor.value}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-semibold">{factor.impact}%</div>
+                    <div className={`text-xs ${
+                      factor.trend === 'declining' ? 'text-destructive' : 
+                      factor.trend === 'stable' ? 'text-success' : 'text-warning'
+                    }`}>
+                      {factor.trend}
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
