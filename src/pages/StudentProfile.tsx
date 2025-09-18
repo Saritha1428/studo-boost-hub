@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -5,11 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Edit, Mail, Phone, MapPin, Calendar, BookOpen } from "lucide-react";
+import { Edit, Mail, Phone, MapPin, Calendar, BookOpen, Save, X } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const StudentProfile = () => {
-  const studentInfo = {
+  const [isEditing, setIsEditing] = useState(false);
+  const [studentInfo, setStudentInfo] = useState({
     name: "Alex Johnson",
     rollNo: "CS21B1001",
     email: "alex.johnson@university.edu",
@@ -18,25 +20,29 @@ const StudentProfile = () => {
     year: "3rd Year",
     address: "123 University Ave, College Town",
     joinDate: "August 2021",
-    avatar: "/placeholder.svg"
+    avatar: "/placeholder.svg",
+    parentPhone: "+1 (555) 987-6543",
+    parentEmail: "parent@email.com",
+    eapcetRank: "12345",
+    caste: "General",
+    income: "₹5,00,000",
+    fatherWork: "Software Engineer"
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setStudentInfo(prev => ({ ...prev, [field]: value }));
   };
 
-  const attendanceHistory = [
-    { month: 'Aug', percentage: 92 },
-    { month: 'Sep', percentage: 88 },
-    { month: 'Oct', percentage: 85 },
-    { month: 'Nov', percentage: 78 },
-    { month: 'Dec', percentage: 82 },
-    { month: 'Jan', percentage: 75 },
-  ];
+  const handleSave = () => {
+    setIsEditing(false);
+    // Add save logic here
+  };
 
-  const marksHistory = [
-    { subject: "DBMS", mid1: 85, mid2: 88, internal: 92, external: 78 },
-    { subject: "DSA", mid1: 78, mid2: 82, internal: 85, external: 80 },
-    { subject: "OS", mid1: 72, mid2: 75, internal: 78, external: 72 },
-    { subject: "CN", mid1: 88, mid2: 85, internal: 90, external: 85 },
-    { subject: "Web Dev", mid1: 95, mid2: 92, internal: 98, external: 88 }
-  ];
+  const handleCancel = () => {
+    setIsEditing(false);
+    // Reset to original values if needed
+  };
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -48,94 +54,237 @@ const StudentProfile = () => {
           <p className="text-muted-foreground">Manage your personal and academic information</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Profile Card */}
-          <Card className="shadow-card lg:col-span-1">
-            <CardHeader className="text-center">
-              <Avatar className="w-24 h-24 mx-auto mb-4">
+        {/* Student Profile Card */}
+        <Card className="shadow-card">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Avatar className="w-16 h-16">
                 <AvatarImage src={studentInfo.avatar} alt={studentInfo.name} />
-                <AvatarFallback className="text-2xl bg-gradient-primary text-primary-foreground">
+                <AvatarFallback className="text-xl bg-gradient-primary text-primary-foreground">
                   {studentInfo.name.split(' ').map(n => n[0]).join('')}
                 </AvatarFallback>
               </Avatar>
-              <CardTitle className="text-xl">{studentInfo.name}</CardTitle>
-              <div className="text-muted-foreground">{studentInfo.rollNo}</div>
-              <Badge variant="secondary" className="mt-2">{studentInfo.department}</Badge>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                <span>{studentInfo.email}</span>
+              <div>
+                <CardTitle className="text-2xl">{studentInfo.name}</CardTitle>
+                <div className="text-muted-foreground">{studentInfo.rollNo}</div>
+                <Badge variant="secondary" className="mt-1">{studentInfo.department}</Badge>
               </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                <span>{studentInfo.phone}</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                <span>{studentInfo.address}</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span>Joined {studentInfo.joinDate}</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <BookOpen className="h-4 w-4 text-muted-foreground" />
-                <span>{studentInfo.year}</span>
-              </div>
-              <Button variant="outline" className="w-full mt-4">
+            </div>
+            {!isEditing ? (
+              <Button variant="outline" onClick={() => setIsEditing(true)}>
                 <Edit className="h-4 w-4 mr-2" />
                 Edit Profile
               </Button>
-            </CardContent>
-          </Card>
+            ) : (
+              <div className="flex gap-2">
+                <Button variant="default" onClick={handleSave}>
+                  <Save className="h-4 w-4 mr-2" />
+                  Save
+                </Button>
+                <Button variant="outline" onClick={handleCancel}>
+                  <X className="h-4 w-4 mr-2" />
+                  Cancel
+                </Button>
+              </div>
+            )}
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Basic Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                {isEditing ? (
+                  <Input 
+                    id="name" 
+                    value={studentInfo.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <span>{studentInfo.name}</span>
+                  </div>
+                )}
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                {isEditing ? (
+                  <Input 
+                    id="email" 
+                    type="email"
+                    value={studentInfo.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Mail className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.email}</span>
+                  </div>
+                )}
+              </div>
 
-          {/* Additional Information */}
-          <Card className="shadow-card lg:col-span-2">
-            <CardHeader>
-              <CardTitle>Additional Information</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                {isEditing ? (
+                  <Input 
+                    id="phone" 
+                    value={studentInfo.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Phone className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.phone}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="address">Address</Label>
+                {isEditing ? (
+                  <Input 
+                    id="address" 
+                    value={studentInfo.address}
+                    onChange={(e) => handleInputChange('address', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <MapPin className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.address}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="year">Academic Year</Label>
+                {isEditing ? (
+                  <Input 
+                    id="year" 
+                    value={studentInfo.year}
+                    onChange={(e) => handleInputChange('year', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.year}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="joinDate">Join Date</Label>
+                <div className="flex items-center gap-2 text-sm p-2 border rounded-md bg-muted">
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
+                  <span>{studentInfo.joinDate}</span>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="parentphone">Parent Phone Number</Label>
+                {isEditing ? (
+                  <Input 
+                    id="parentphone" 
+                    value={studentInfo.parentPhone}
+                    onChange={(e) => handleInputChange('parentPhone', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Phone className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.parentPhone}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="parentemail">Parent Email ID</Label>
+                {isEditing ? (
+                  <Input 
+                    id="parentemail" 
+                    type="email"
+                    value={studentInfo.parentEmail}
+                    onChange={(e) => handleInputChange('parentEmail', e.target.value)}
+                  />
+                ) : (
+                  <div className="flex items-center gap-2 text-sm p-2 border rounded-md">
+                    <Mail className="h-4 w-4 text-muted-foreground" />
+                    <span>{studentInfo.parentEmail}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="eapcetrank">EAPCET Rank</Label>
+                {isEditing ? (
+                  <Input 
+                    id="eapcetrank" 
+                    value={studentInfo.eapcetRank}
+                    onChange={(e) => handleInputChange('eapcetRank', e.target.value)}
+                  />
+                ) : (
+                  <div className="text-sm p-2 border rounded-md">
+                    <span>{studentInfo.eapcetRank}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="caste">Caste</Label>
+                {isEditing ? (
+                  <Input 
+                    id="caste" 
+                    value={studentInfo.caste}
+                    onChange={(e) => handleInputChange('caste', e.target.value)}
+                  />
+                ) : (
+                  <div className="text-sm p-2 border rounded-md">
+                    <span>{studentInfo.caste}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="income">Family Income (Annual)</Label>
+                {isEditing ? (
+                  <Input 
+                    id="income" 
+                    value={studentInfo.income}
+                    onChange={(e) => handleInputChange('income', e.target.value)}
+                  />
+                ) : (
+                  <div className="text-sm p-2 border rounded-md">
+                    <span>{studentInfo.income}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="fatherwork">Father's Occupation</Label>
+                {isEditing ? (
+                  <Input 
+                    id="fatherwork" 
+                    value={studentInfo.fatherWork}
+                    onChange={(e) => handleInputChange('fatherWork', e.target.value)}
+                  />
+                ) : (
+                  <div className="text-sm p-2 border rounded-md">
+                    <span>{studentInfo.fatherWork}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Profile Photo Upload */}
+            {isEditing && (
+              <div className="space-y-2">
                 <Label htmlFor="photo">Profile Photo</Label>
                 <div className="flex items-center gap-4">
                   <Input id="photo" type="file" accept="image/*" />
                   <Button variant="outline">Upload</Button>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="parentphone">Parent Phone Number</Label>
-                  <Input id="parentphone" placeholder="+1 (555) 987-6543" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="parentemail">Parent Email ID</Label>
-                  <Input id="parentemail" type="email" placeholder="parent@email.com" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="eapcetrank">EAPCET Rank</Label>
-                  <Input id="eapcetrank" placeholder="12345" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="caste">Caste</Label>
-                  <Input id="caste" placeholder="General/OBC/SC/ST" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="income">Family Income (Annual)</Label>
-                  <Input id="income" placeholder="₹5,00,000" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="fatherwork">Father's Occupation</Label>
-                  <Input id="fatherwork" placeholder="Software Engineer" />
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <Button variant="gradient">Save Changes</Button>
-                <Button variant="outline">Reset</Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            )}
+          </CardContent>
+        </Card>
 
       </div>
     </div>
