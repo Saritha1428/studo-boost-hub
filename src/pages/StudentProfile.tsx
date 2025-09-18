@@ -12,21 +12,21 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 const StudentProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [studentInfo, setStudentInfo] = useState({
-    name: "Alex Johnson",
+    name: "Arjun Reddy Goud",
     rollNo: "CS21B1001",
-    email: "alex.johnson@university.edu",
-    phone: "+1 (555) 123-4567",
+    email: "arjun.reddy@university.edu",
+    phone: "+91 9876543210",
     department: "Computer Science",
     year: "3rd Year",
-    address: "123 University Ave, College Town",
+    address: "123 Jubilee Hills, Hyderabad, Telangana",
     joinDate: "August 2021",
     avatar: "/placeholder.svg",
-    parentPhone: "+1 (555) 987-6543",
-    parentEmail: "parent@email.com",
+    parentPhone: "+91 9123456789",
+    parentEmail: "ramesh.goud@email.com",
     eapcetRank: "12345",
-    caste: "General",
-    income: "₹5,00,000",
-    fatherWork: "Software Engineer"
+    caste: "BC-A",
+    income: "₹8,00,000",
+    fatherWork: "Government Employee"
   });
 
   const handleInputChange = (field: string, value: string) => {

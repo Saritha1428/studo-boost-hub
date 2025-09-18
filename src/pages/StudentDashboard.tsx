@@ -76,15 +76,20 @@ const StudentDashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Risk Alert */}
         {studentData.riskLevel === "medium" && (
-          <Alert className="mb-6 border-warning/20 bg-warning/5">
-            <AlertTriangle className="h-4 w-4 text-warning" />
-            <AlertDescription className="text-warning-foreground">
-              You're flagged at Medium Risk ({studentData.riskPercentage}%) due to declining attendance. 
-              <Link to="/counseling" className="ml-2 underline font-medium">
-                Request counseling now
-              </Link>
-            </AlertDescription>
-          </Alert>
+          <div className="p-4 rounded-lg bg-warning/10 border border-warning/20 mb-6">
+            <div className="flex items-center gap-3 mb-3">
+              <AlertTriangle className="h-5 w-5 text-warning" />
+              <span className="font-medium text-warning">Risk Alert</span>
+            </div>
+            <p className="text-sm text-foreground mb-3">
+              You're flagged at medium risk (65%) due to declining academic performance and irregular attendance patterns.
+            </p>
+            <Link to="/counseling">
+              <Button variant="warning" size="sm">
+                Request Counseling Now
+              </Button>
+            </Link>
+          </div>
         )}
 
         {/* Stats Grid */}
@@ -182,36 +187,39 @@ const StudentDashboard = () => {
           </Card>
 
           {/* Fees Structure */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <DollarSign className="h-5 w-5 text-success" />
-                Fees Overview
-              </CardTitle>
+              <CardTitle className="text-lg font-semibold">Fees Status</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">Semester Fee</span>
-                  <span className="text-sm text-success font-semibold">Paid ✓</span>
+                {/* Progress Bar */}
+                <div className="space-y-2">
+                  <div className="w-full bg-muted rounded-full h-3">
+                    <div className="bg-success h-3 rounded-full" style={{ width: '70%' }}></div>
+                  </div>
+                  <div className="text-right text-sm text-muted-foreground">70% Paid</div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">Library Fee</span>
-                  <span className="text-sm text-success font-semibold">Paid ✓</span>
+                
+                {/* Fee Details */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <span className="text-muted-foreground text-sm">Total Fees:</span>
+                    <div className="font-semibold">₹50,000</div>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-muted-foreground text-sm">Paid:</span>
+                    <div className="font-semibold text-success">₹35,000</div>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-muted-foreground text-sm">Balance:</span>
+                    <div className="font-semibold text-destructive">₹15,000</div>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-muted-foreground text-sm">Due Date:</span>
+                    <div className="font-semibold">2025-10-15</div>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">Lab Fee</span>
-                  <span className="text-sm text-warning font-semibold">Pending</span>
-                </div>
-                <div className="border-t pt-3">
-                  <div className="text-sm text-muted-foreground">Next Payment Due</div>
-                  <div className="font-semibold">₹15,000 - March 15, 2024</div>
-                </div>
-                <Link to="/fees">
-                  <Button variant="outline" className="w-full">
-                    View Fee Details
-                  </Button>
-                </Link>
               </div>
             </CardContent>
           </Card>
@@ -220,7 +228,7 @@ const StudentDashboard = () => {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Attendance Pie Chart */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
               <CardTitle>Attendance Overview</CardTitle>
             </CardHeader>
@@ -246,7 +254,7 @@ const StudentDashboard = () => {
           </Card>
 
           {/* Performance Trend */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
               <CardTitle>GPA Trend</CardTitle>
             </CardHeader>
