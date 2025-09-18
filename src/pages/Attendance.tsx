@@ -90,10 +90,10 @@ const Attendance = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Weekly Attendance Trend */}
+          {/* Attendance Trend */}
           <Card className="shadow-card">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Weekly Attendance Trend</CardTitle>
+              <CardTitle>Attendance Trend</CardTitle>
               <Select defaultValue="semester">
                 <SelectTrigger className="w-32">
                   <SelectValue />

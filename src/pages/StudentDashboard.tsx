@@ -14,7 +14,8 @@ import {
   AlertTriangle,
   MessageCircle,
   TrendingUp,
-  Award
+  Award,
+  DollarSign
 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { Link } from "react-router-dom";
@@ -152,7 +153,7 @@ const StudentDashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Gamification Progress */}
+          {/* Level Progress */}
           <Card className="shadow-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -164,48 +165,53 @@ const StudentDashboard = () => {
               <div className="space-y-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">Level {studentData.level}</div>
-                  <div className="text-sm text-muted-foreground">
-                    {studentData.currentXP} / {studentData.nextLevelXP} XP
-                  </div>
+                  <div className="text-sm text-muted-foreground">Current Progress</div>
                 </div>
                 <Progress 
-                  value={(studentData.currentXP / studentData.nextLevelXP) * 100} 
+                  value={75} 
                   className="h-3"
                 />
-                <div className="flex justify-between text-sm">
+                <div className="text-center text-sm">
                   <span>🔥 {studentData.streak} day streak</span>
-                  <span>{studentData.nextLevelXP - studentData.currentXP} XP to next level</span>
                 </div>
-                <Link to="/gamification">
-                  <Button variant="gradient" className="w-full">
-                    View All Achievements
-                  </Button>
-                </Link>
+                <Button variant="gradient" className="w-full">
+                  View All Achievements
+                </Button>
               </div>
             </CardContent>
           </Card>
 
-          {/* Academic Progress */}
+          {/* Fees Structure */}
           <Card className="shadow-card">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-accent" />
-                Academic Progress
+                <DollarSign className="h-5 w-5 text-success" />
+                Fees Overview
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">Current Semester</span>
-                  <span className="text-sm text-muted-foreground">6th Semester</span>
+                  <span className="text-sm font-medium">Semester Fee</span>
+                  <span className="text-sm text-success font-semibold">Paid ✓</span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-gradient-primary h-2 rounded-full" style={{ width: '75%' }}></div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium">Library Fee</span>
+                  <span className="text-sm text-success font-semibold">Paid ✓</span>
                 </div>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Progress: 75%</span>
-                  <span>Expected Graduation: 2025</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium">Lab Fee</span>
+                  <span className="text-sm text-warning font-semibold">Pending</span>
                 </div>
+                <div className="border-t pt-3">
+                  <div className="text-sm text-muted-foreground">Next Payment Due</div>
+                  <div className="font-semibold">₹15,000 - March 15, 2024</div>
+                </div>
+                <Link to="/fees">
+                  <Button variant="outline" className="w-full">
+                    View Fee Details
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
