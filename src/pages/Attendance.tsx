@@ -51,13 +51,15 @@ const Attendance = () => {
 
         {/* Attendance Shortage Alert */}
         {lowAttendanceSubjects.length > 0 && (
-          <Alert className="mb-6 border-warning/20 bg-warning/5">
-            <AlertTriangle className="h-4 w-4 text-warning" />
-            <AlertDescription className="text-warning-foreground">
-              <strong>Attendance Shortage Alert:</strong> You have low attendance in {lowAttendanceSubjects.length} subject(s). 
-              Immediate action required to avoid academic issues.
-            </AlertDescription>
-          </Alert>
+          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 mb-6">
+            <div className="flex items-center gap-2 mb-2">
+              <AlertTriangle className="h-5 w-5 text-destructive" />
+              <span className="font-semibold text-destructive">Low Attendance Alert</span>
+            </div>
+            <p className="text-sm text-foreground">
+              Attendance shortage alert: You have low attendance in {lowAttendanceSubjects.length} subject(s). Immediate action required to avoid academic issues.
+            </p>
+          </div>
         )}
 
         {/* Stats Overview */}
@@ -91,7 +93,7 @@ const Attendance = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Attendance Trend */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Attendance Trend</CardTitle>
               <Select defaultValue="semester">
@@ -125,7 +127,7 @@ const Attendance = () => {
           </Card>
 
           {/* Subject-wise Attendance */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
               <CardTitle>Subject-wise Attendance</CardTitle>
             </CardHeader>
@@ -148,14 +150,14 @@ const Attendance = () => {
         </div>
 
         {/* Detailed Subject Breakdown */}
-        <Card className="shadow-card mb-8">
+        <Card className="shadow-card mb-8 hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
           <CardHeader>
             <CardTitle>Subject Details</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {subjectAttendance.map((subject, index) => (
-                <div key={index} className="flex items-center justify-between p-4 rounded-lg border">
+                <div key={index} className="flex items-center justify-between p-4 rounded-lg border hover:bg-button-hover transition-all duration-300">
                   <div className="flex items-center gap-4">
                     <div>
                       <h3 className="font-semibold">{subject.subject}</h3>

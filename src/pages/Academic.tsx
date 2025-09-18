@@ -138,7 +138,7 @@ const Academic = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* GPA Trend */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>GPA Progression</CardTitle>
               <Select defaultValue="all">
@@ -181,7 +181,7 @@ const Academic = () => {
           </Card>
 
           {/* Subject Performance Radar */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
               <CardTitle>Subject Performance Analysis</CardTitle>
             </CardHeader>
@@ -285,7 +285,7 @@ const Academic = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Predicted Performance */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
@@ -295,7 +295,7 @@ const Academic = () => {
             <CardContent>
               <div className="space-y-4">
                 {predictedGrades.map((pred, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border">
+                  <div key={index} className="flex items-center justify-between p-3 rounded-lg border hover:bg-button-hover transition-all duration-300">
                     <div>
                       <div className="font-medium">{pred.subject}</div>
                       <div className="text-sm text-muted-foreground">
@@ -318,7 +318,7 @@ const Academic = () => {
           </Card>
 
           {/* Recommendations */}
-          <Card className="shadow-card">
+          <Card className="shadow-card hover:shadow-glow/20 transition-all duration-300 hover:bg-button-hover">
             <CardHeader>
               <CardTitle>Academic Recommendations</CardTitle>
             </CardHeader>
