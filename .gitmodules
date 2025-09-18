@@ -1,0 +1,3 @@
+[submodule "SIH/SIH/AiDropoutPrediction"]
+	path = SIH/SIH/AiDropoutPrediction
+	url = https://github.com/Akhila1908/Ai-drop-out-based-prediction-and-counselling.git
